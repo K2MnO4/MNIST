@@ -39,8 +39,11 @@ def print_forward_process(model: NetWork, x: torch.Tensor):
 
 
 if __name__ == '__main__':
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    print(f"device: {device}")
     model = NetWork()
-    print(model.state_dict())
+    model.to(device)
+    # print(model.state_dict())
     # print_parameters(model)
-    # x = torch.zeros([5, 28, 28])
-    # print_forward_process(model, x)
+    x = torch.zeros([5, 28, 28]).to(device)
+    print_forward_process(model, x)
